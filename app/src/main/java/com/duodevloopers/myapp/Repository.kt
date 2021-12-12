@@ -1,6 +1,7 @@
 package com.duodevloopers.myapp
 
 import androidx.lifecycle.LiveData
+import retrofit2.Response
 
 class Repository(private val userDao: UserDao) {
 
@@ -12,7 +13,10 @@ class Repository(private val userDao: UserDao) {
     }
 
 
-    fun getAllPersons() : LiveData<List<Person>> = allPerson
+    fun getAllPersons(): LiveData<List<Person>> = allPerson
 
+    suspend fun postAllPersons(persons: Persons): Response<Persons> {
+        return RetrofitInstance.api.postAllPersons(persons)
+    }
 
 }
